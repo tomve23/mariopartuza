@@ -12,14 +12,15 @@ public class Mapa {
 	public Mapa(int n, int m){
 		this.map= new Casillero[n][m];
 	}
+	
 	//para utilizar en prueba hardcodeo el n,m
 	public Mapa(){
-		this.map = new Casillero[5][5];
-		for(int i=0;i<5;i++)
-			for(int j=0;j<5;j++)
+		this.map = new Casillero[6][6];
+		for(int i=0;i<6;i++)
+			for(int j=0;j<6;j++)
 				this.map[i][j]= new Casillero();
-		this.n=5;
-		this.m=5;
+		this.n= map.length;
+		this.m = map[0].length;
 	}
 	
 	

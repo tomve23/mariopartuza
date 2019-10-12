@@ -16,27 +16,27 @@ class testMapa {
 	void testBifurcación() throws FileNotFoundException {
 		
 		Mapa map = new Mapa();
-		File pf = new File ("C:\\Users\\yyablons\\Documents\\Universidad\\Programación Avanzada\\Taller\\MarioPartuzaEntrega1\\MarioParty\\src\\Archivos\\seedsMapa.txt");
+		File pf = new File ("C:\\Users\\laboratorios\\Desktop\\MarioParty\\src\\Archivos\\seedsMapa.txt");
 		map.seedMapa(pf);
-		Assert.assertTrue(map.getMap()[2][3].isDivideFlag());
+		Assert.assertTrue(map.getMap()[1][1].isDivideFlag());
 		
 	}
 	@Test
 	void testCasilleroSwitch() throws FileNotFoundException {
 		
 		Mapa map = new Mapa();
-		File pf = new File ("C:\\Users\\yyablons\\Documents\\Universidad\\Programación Avanzada\\Taller\\MarioPartuzaEntrega1\\MarioParty\\src\\Archivos\\seedsMapa.txt");
+		File pf = new File ("C:\\Users\\laboratorios\\Desktop\\MarioParty\\src\\Archivos\\seedsMapa.txt");
 		map.seedMapa(pf);
-	    Assert.assertTrue(map.getMap()[1][3].isSwitchFlag());
+	    Assert.assertTrue(map.getMap()[2][1].isSwitchFlag());
 		
 	}
 	@Test
 	void testCasilleroExplosion() throws FileNotFoundException {
 		
 		Mapa map = new Mapa();
-		File pf = new File ("C:\\Users\\yyablons\\Documents\\Universidad\\Programación Avanzada\\Taller\\MarioPartuzaEntrega1\\MarioParty\\src\\Archivos\\seedsMapa.txt");
+		File pf = new File ("C:\\Users\\laboratorios\\Desktop\\MarioParty\\src\\Archivos\\seedsMapa.txt");
 		map.seedMapa(pf);
-	    Assert.assertTrue(map.getMap()[1][2].isExplosionFlag());
+	    Assert.assertTrue(map.getMap()[1][3].isExplosionFlag());
 		
 	}
 

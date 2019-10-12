@@ -5,12 +5,20 @@ public class Casillero {
 	private boolean divideFlag;
 	private boolean explosionFlag;
 	private boolean pathFlag;
+	private boolean star;
 	
 	public Casillero(){
 		this.switchFlag= false;
 		this.explosionFlag = false;
 		this.divideFlag = false;
 		this.pathFlag = false;
+		this.star = false;
+	}
+	public boolean isStar() {
+		return star;
+	}
+	public void setStar(boolean star) {
+		this.star = star;
 	}
 	public Casillero(Casillero c){
 		this.switchFlag= c.switchFlag;
