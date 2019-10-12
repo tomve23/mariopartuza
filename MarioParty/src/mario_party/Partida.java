@@ -2,7 +2,6 @@ package mario_party;
 
 import java.util.ArrayList;
 
-import jdk.nashorn.internal.parser.Scanner;
 
 public class Partida {
 	private Jugador[] players;
