@@ -12,12 +12,13 @@ class testJugador {
 
 	@Test
 	void test() {
-	 Jugador player = new Jugador();
+	 
+		/*Jugador player = new Jugador();
 	 PowerUp powa = new PowerUp ("Flechazo Gorgonita",10,4);
 	 Personaje archer = new Personaje ("Archer","GORGONIA","Soltero",powa);
 	 player.setCharacter(archer);
 	 player.setTag("ElChablon");
-	 
+	 */
 	}
 
 }

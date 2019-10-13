@@ -1,5 +1,7 @@
 package mario_party;
 
+import javax.swing.ImageIcon;
+
 public class Jugador {
 	private String tag;
 	private int coins;
@@ -8,9 +10,12 @@ public class Jugador {
 	private Coordenada posActual;
 	private Coordenada posAnterior;
 	
-	public Jugador (){
+	public Jugador (Coordenada inicial, Personaje character){
 		this.coins = 50; //Elegir cantidad Inicial Monedas
 		this.stars = 0;
+		posActual = new Coordenada(inicial.getX(),inicial.getY());
+		posAnterior = new Coordenada(inicial.getX(),inicial.getY());
+		this.character = character;
 	}
 	
 	public void setTag(String name) {
@@ -72,6 +77,10 @@ public class Jugador {
 	public void Desplazarse(Coordenada sig) {
 		this.posAnterior=this.posActual;
 		this.posActual = sig;
+	}
+	
+	public ImageIcon getImagen() {
+		return character.getImg();
 	}
 	
 }
