@@ -1,11 +1,9 @@
 package mario_party;
 
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
 
 import javazoom.jl.decoder.JavaLayerException;
 
@@ -13,16 +11,14 @@ public class Partida {
 	private Jugador[] players;
 	private int cantRondas;
 	private Mapa map;
-	private int dado;
-	
-	
+	static int dado;
+
 	// -------Parte para los graficos-------------------------
 
 	Coordenada posMouse = new Coordenada(0, 0);
 
 	// esto es todo de prueBa
-	private JFrame f = new JFrame("Ventana con Contexto Grafico");
-	private MouseEventDemo panelmouse;
+	JPanelGrafico jPanel;
 
 	// ------------------------------------------------------
 
@@ -31,22 +27,20 @@ public class Partida {
 		this.map = new Mapa(map);
 		this.players = players;
 
-		panelmouse = new MouseEventDemo(map, players, posMouse);
+		jPanel = new JPanelGrafico(map, players,posMouse);
+		new JVentanaGrafica(jPanel).setVisible(true);
 
-		f.add(panelmouse);
-
-		f.setBounds(300, 300, 800, 800);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setResizable(false);// evita redimencionar la ventana
-		f.setVisible(true);
-
-		
 	}
 
 	public void tirarDado() {
-		this.dado = (int) (Math.random() * 7) + 1;
-		System.out.println("Salio el dado: " + this.dado);
-		//this.dado = 1;
+		dado=0;
+		JVentanaDado Dado = new JVentanaDado();
+		Dado.setVisible(true);
+		while(dado==0)
+			System.out.print("");
+		Dado.setVisible(false);
+		System.out.println("Salio el dado: " + dado);
+		// this.dado = 1;
 	}
 
 	private static String getGanador(Jugador[] players) {
@@ -71,7 +65,6 @@ public class Partida {
 
 	public String jugarPartida() throws JavaLayerException {
 
-		
 		int cantJugadores = this.players.length;
 		this.crearEstrellas();
 
@@ -108,8 +101,6 @@ public class Partida {
 		int x, y;
 		int siguienteIndex;
 
-		// System.out.println("La posicion actual es " + "(" + p.getPosActual().getX() +
-		// "," + p.getPosActual().getY() + ")");
 
 		for (int i = 0; i < dado; i++) {
 			ArrayList<Coordenada> validos = new ArrayList<Coordenada>();
@@ -125,28 +116,23 @@ public class Partida {
 				validos.add(new Coordenada(x, y + 1)); // Derecha
 
 			validos.remove(p.getPosAnterior());
-			panelmouse.paint(panelmouse.getGraphics());
+			jPanel.paintComponent(jPanel.getGraphics());
 			if (validos.size() > 1) {
 
-				panelmouse.setOpciones(validos);
-				panelmouse.dibujarOpciones(panelmouse.getGraphics());
-				//panelmouse.paint(panelmouse.getGraphics());
+				jPanel.setOpciones(validos);
+				jPanel.dibujarOpciones(jPanel.getGraphics());
+				// panelmouse.paint(panelmouse.getGraphics());
 
 				// siguienteIndex = elegirCamino(validos);
 
-				int asd = 0;
-				System.out.println(validos.contains(posMouse));
-				while (!validos.contains(posMouse)) {
-
-					if (asd == 0)
-						System.out.print("");
-					posMouse = posMouse;
+				while (!validos.contains(posMouse) ) {
+					
+					System.out.print("");
 				}
 
 				siguienteIndex = validos.indexOf(posMouse);
-				panelmouse.setOpciones(null);
-			}
-			else
+				jPanel.setOpciones(null);
+			} else
 				siguienteIndex = 0;
 
 			try {
@@ -157,9 +143,7 @@ public class Partida {
 
 			p.Desplazarse(validos.get(siguienteIndex));
 
-			panelmouse.paint(panelmouse.getGraphics());
-			posMouse.setX(-1);
-			posMouse.setY(-1);
+			jPanel.paintComponent(jPanel.getGraphics());
 
 			if (map.getMap()[p.getPosActual().getX()][p.getPosActual().getY()].isStar()) {
 				p.increaseStars(1);

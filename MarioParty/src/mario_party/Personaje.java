@@ -1,5 +1,8 @@
 package mario_party;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 public class Personaje {
@@ -7,7 +10,7 @@ public class Personaje {
 	private String origen;
 	private String estadoCivil;
 	private PowerUp powerUp;
-	private ImageIcon Img;
+	private Image Img;
 	
 	
 	public Personaje(String nombre, String origen, String estado, PowerUp pu, String img){
@@ -15,7 +18,8 @@ public class Personaje {
 		this.origen= origen;
 		this.estadoCivil = estado;
 		this.powerUp = new PowerUp(pu.getNombrePowerUp(),pu.getAlcanceCasilleros(),pu.getTurnosCoolDown()); //Realmente pienso que podriamos igualarlo. Sino estas creando una nueva instancia al pedo. Revisar
-		this.Img = new ImageIcon(img);
+		Toolkit herramienta= Toolkit.getDefaultToolkit();
+		this.Img = herramienta.getImage(img);
 	}
 
 	public String getNombre() {
@@ -50,11 +54,11 @@ public class Personaje {
 		this.powerUp = powerUp;
 	}
 
-	public ImageIcon getImg() {
+	public Image getImg() {
 		return Img;
 	}
 
-	public void setImg(ImageIcon img) {
+	public void setImg(Image img) {
 		Img = img;
 	}
 	

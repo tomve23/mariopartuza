@@ -1,6 +1,5 @@
 package mario_party;
 
-import javax.swing.ImageIcon;
 
 public class Jugador {
 	private String tag;
@@ -79,8 +78,6 @@ public class Jugador {
 		this.posActual = sig;
 	}
 	
-	public ImageIcon getImagen() {
-		return character.getImg();
-	}
+
 	
 }

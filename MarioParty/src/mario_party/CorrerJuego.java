@@ -13,7 +13,7 @@ public class CorrerJuego {
 		
 		Jugador arrayPlayers[] = new Jugador[2];
 			
-		Personaje fito = new Personaje("Pepe", "El Conurbano Bonaerense", "Viudo", new PowerUp("Autodestruccion", 15, 3), "src\\Archivos\\peon.png");
+		Personaje fito = new Personaje("Pepe", "El Conurbano Bonaerense", "Viudo", new PowerUp("Autodestruccion", 15, 3), "src\\Archivos\\test.png");
 		
 		arrayPlayers[0] = new Jugador(MapasDisponibles.Mapa4_inicio1, fito);
 		arrayPlayers[1] = new Jugador(MapasDisponibles.Mapa4_inicio2, fito);
