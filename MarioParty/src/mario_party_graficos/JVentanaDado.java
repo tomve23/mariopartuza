@@ -1,4 +1,4 @@
-package mario_party;
+package mario_party_graficos;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,13 +9,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import mario_party.Partida;
+
 public class JVentanaDado extends JFrame {
 
 	private JPanel panel;
 	private JLabel titulo;
 	private JButton boton;
 
-	JVentanaDado() {
+	public JVentanaDado() {
 
 		iniciar_componentes();
 		setBounds(1100, 150, 150, 150);

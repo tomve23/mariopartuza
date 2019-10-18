@@ -1,8 +1,10 @@
-package mario_party;
+package mario_party_graficos;
+
+import mario_party.Jugador;
 
 public class AnimacionPersonaje extends Thread{
 
-	
+	static int i;
 	public void run() {
 		while(true)
 		{

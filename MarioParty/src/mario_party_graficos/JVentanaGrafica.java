@@ -1,4 +1,4 @@
-package mario_party;
+package mario_party_graficos;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
