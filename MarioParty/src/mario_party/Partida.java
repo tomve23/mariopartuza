@@ -96,7 +96,7 @@ public class Partida {
 		hayEstrella = true;
 
 		jPanel.setEstrella(new Coordenada(coordenadaI, coordenadaJ));
-
+		//jPanel.setCasillero(map.getMap()[coordenadaI][coordenadaJ]);
 	}
 
 	public String jugarPartida() throws JavaLayerException, InterruptedException {
@@ -197,6 +197,7 @@ public class Partida {
 			if (map.getMap()[p.getPosActual().getX()][p.getPosActual().getY()].isStar()) {
 				p.increaseStars(1);
 				jPanel.setEstrella(null);
+				//jPanel.setCasillero(null);
 				map.getMap()[p.getPosActual().getX()][p.getPosActual().getY()].setStar(false);
 				this.crearEstrellas();
 				jPanel.dibujarEstrellas(jPanel.getGraphics());

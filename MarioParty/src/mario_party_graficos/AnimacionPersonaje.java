@@ -1,6 +1,6 @@
 package mario_party_graficos;
 
-import mario_party.Jugador;
+
 
 public class AnimacionPersonaje extends Thread{
 
@@ -14,10 +14,10 @@ public class AnimacionPersonaje extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			JPanelGrafico.incremento++;
+			JPanelGrafico.increpersonaje++;
 			
-			if(JPanelGrafico.incremento > 3)
-				JPanelGrafico.incremento=0;
+			if(JPanelGrafico.increpersonaje > 3)
+				JPanelGrafico.increpersonaje=0;
 			
 		}
 	}

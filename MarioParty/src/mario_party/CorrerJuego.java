@@ -27,11 +27,9 @@ public class CorrerJuego {
 		arrayPlayers[3].setTag("Rodri vago de mierda");
 		
 		int[][] map = MapasDisponibles.Mapa4;
-		/*
-		SI QUERES MUSICA DESCOMENTA ESTO
+		
 		Thread musica = new MusicaFondo("proceso musica");
 		musica.start();
-		*/
 		Partida part = new Partida(arrayPlayers, 10, map);
 		System.out.println(part.jugarPartida());
 		

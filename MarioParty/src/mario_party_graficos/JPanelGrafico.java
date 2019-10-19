@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import mario_party.Casillero;
 import mario_party.Coordenada;
 import mario_party.Jugador;
 import mario_party.Partida;
@@ -20,10 +21,11 @@ public class JPanelGrafico extends JPanel {
 	private Jugador jugador[];
 
 	int[][] map;
-
+	
 	List<Coordenada> opciones;
-	static int incremento = 0;
+	static int increpersonaje = 0;
 	Coordenada estrella;
+	Casillero cas;
 	AnimacionPersonaje hilo;
 
 	public JPanelGrafico(int[][] map, Jugador jugador[], Coordenada posMouse) {
@@ -84,8 +86,8 @@ public class JPanelGrafico extends JPanel {
 		for (int i = 0; i < jugador.length; i++) {
 
 		
-			int mx = (incremento % 6) * 32;
-			int my = (incremento / 6) * 32;
+			int mx = (increpersonaje % 6) * 32;
+			int my = (increpersonaje / 6) * 32;
 
 			g.drawImage(jugador[i].getCharacter().getImg(), jugador[i].getPosActual().getY() * ancho,
 					jugador[i].getPosActual().getX() * alto, (jugador[i].getPosActual().getY() * ancho) + 32,
@@ -117,12 +119,6 @@ public class JPanelGrafico extends JPanel {
 					g.setColor(Color.BLACK);
 					g.fillRect(j * ancho, i * alto, ancho, alto);
 					g.setColor(Color.blue);
-					g.fillRect(j * ancho + difx, i * alto + dify, ancho - 2 * difx, alto - 2 * dify);
-					break;
-				case 4: // Estrellas
-					g.setColor(Color.BLACK);
-					g.fillRect(j * ancho, i * alto, ancho, alto);
-					g.setColor(Color.BLACK);
 					g.fillRect(j * ancho + difx, i * alto + dify, ancho - 2 * difx, alto - 2 * dify);
 					break;
 				case 0: // bloque
@@ -160,6 +156,17 @@ public class JPanelGrafico extends JPanel {
 
 	public void dibujarEstrellas(Graphics g) {
 
+		/*
+
+		
+			int mx = (increestrella % 6) * 32;
+			int my = (increestrella / 6) * 32;
+
+			g.drawImage(cas.getImg(), estrella.getY() * ancho,
+					estrella.getX() * alto, (estrella.getY()  * ancho) + 32,
+					(estrella.getX() * alto) + 48, mx, my, mx + 32, my + 48, null);
+		repaint();
+		 */
 		g.setColor(Color.YELLOW);
 		g.fillRect(estrella.getY() * ancho, estrella.getX() * alto, ancho, alto);
 		g.setColor(Color.YELLOW);
