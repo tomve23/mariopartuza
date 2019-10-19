@@ -15,10 +15,16 @@ public class CorrerJuego {
 			
 		Personaje fito = new Personaje("Pepe", "El Conurbano Bonaerense", "Viudo", new PowerUp("Autodestruccion", 15, 3), "src\\Archivos\\test.png");
 		
+		
+		
 		arrayPlayers[0] = new Jugador(MapasDisponibles.Mapa4_inicio1, fito);
+		arrayPlayers[0].setTag("Mati Crack");
 		arrayPlayers[1] = new Jugador(MapasDisponibles.Mapa4_inicio2, fito);
+		arrayPlayers[1].setTag("Yahir Crack");
 		arrayPlayers[2] = new Jugador(MapasDisponibles.Mapa4_inicio3, fito);
+		arrayPlayers[2].setTag("Lucho Crack");
 		arrayPlayers[3] = new Jugador(MapasDisponibles.Mapa4_inicio4, fito);
+		arrayPlayers[3].setTag("Rodri vago de mierda");
 		
 		int[][] map = MapasDisponibles.Mapa4;
 		/*

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import BlackJack.BlackJack;
 import javazoom.jl.decoder.JavaLayerException;
 import mario_party_graficos.JPanelGrafico;
 import mario_party_graficos.JVentanaDado;
@@ -63,8 +64,6 @@ public class Partida {
 
 	private void crearEstrellas() {
 
-		// if (this.map.getMap()[1][4].isPathFlag())
-		// this.map.getMap()[1][4].setStar(true);
 
 		Casillero casillero;
 		double[][] matriz = new double[map.getMap().length][map.getMap()[0].length];
@@ -100,11 +99,11 @@ public class Partida {
 
 	}
 
-	public String jugarPartida() throws JavaLayerException {
+	public String jugarPartida() throws JavaLayerException, InterruptedException {
 
 		int cantJugadores = this.players.length;
 		this.crearEstrellas();
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < cantRondas; i++) {
 
 			for (int j = 0; j < cantJugadores; j++) {
 
@@ -112,6 +111,16 @@ public class Partida {
 				if (map.getMap()[players[j].getPosActual().getX()][players[j].getPosActual().getY()].isExplosionFlag())
 					players[j].decreaseStars(1);
 
+			}
+			
+			BlackJack b = new BlackJack();
+			ArrayList<String> jugadores = new ArrayList<String>();
+			for(int k=0;k<cantJugadores;k++) {
+				jugadores.add(players[k].getTag());
+			}
+			ArrayList<Integer> ganador =b.run(jugadores);
+			for (Integer in : ganador) {
+				players[in].increaseStars(2);
 			}
 		}
 
