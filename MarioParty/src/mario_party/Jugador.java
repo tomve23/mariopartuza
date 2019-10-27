@@ -47,8 +47,7 @@ public class Jugador {
 	}
 	
 	public void decreaseStars(int stars) {
-		if(this.stars>0)
-			this.stars -= stars;
+		this.stars -= stars;
 	}
 
 	public Coordenada getPosActual() {

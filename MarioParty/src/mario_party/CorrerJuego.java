@@ -1,9 +1,9 @@
 package mario_party;
 
-
-
+import mario_party_graficos.JVentanaGUI;
 
 public class CorrerJuego {
+
 
 	public static void main(String[] args) throws Exception {
 //		C:\\Users\\Matias\\Downloads\\Super_Mario_Bros._DUBSTEP_REMIX.mp3
@@ -15,24 +15,25 @@ public class CorrerJuego {
 			
 		Personaje fito = new Personaje("Pepe", "El Conurbano Bonaerense", "Viudo", new PowerUp("Autodestruccion", 15, 3), "src\\Archivos\\test.png");
 		
-		
-		
 		arrayPlayers[0] = new Jugador(MapasDisponibles.Mapa4_inicio1, fito);
-		arrayPlayers[0].setTag("Mati Crack");
+		arrayPlayers[0].setTag("YAHIR");
 		arrayPlayers[1] = new Jugador(MapasDisponibles.Mapa4_inicio2, fito);
-		arrayPlayers[1].setTag("Yahir Crack");
+		arrayPlayers[1].setTag("Matias");
 		arrayPlayers[2] = new Jugador(MapasDisponibles.Mapa4_inicio3, fito);
-		arrayPlayers[2].setTag("Lucho Crack");
+		arrayPlayers[2].setTag("Maxi");
 		arrayPlayers[3] = new Jugador(MapasDisponibles.Mapa4_inicio4, fito);
-		arrayPlayers[3].setTag("Rodri vago de mierda");
-		
+		arrayPlayers[3].setTag("Mati2");
 		int[][] map = MapasDisponibles.Mapa4;
-		
+		/*
 		Thread musica = new MusicaFondo("proceso musica");
 		musica.start();
-		Partida part = new Partida(arrayPlayers, 10, map);
-		System.out.println(part.jugarPartida());
-		
+		 */
+		Partida part = new Partida(arrayPlayers,3, map);
+		JVentanaGUI hiloVentana = new JVentanaGUI(map,arrayPlayers,part.getPosMouse());
+		hiloVentana.start();
+		System.out.println("El ganador es: "+part.jugarPartida());
+		//musica.stop();
+		System.exit(0);
 	}
 
 }

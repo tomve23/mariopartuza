@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -81,16 +82,11 @@ public class JFrameBJ extends JFrame{
 		this.setLayout(null);
 		
 		
-
-//		players.add(new PlayerBJ("Yahir",deck.dealCard(),deck.dealCard()));
-//		players.add(new PlayerBJ("Ayrton",deck.dealCard(),deck.dealCard()));
-//		players.add(new PlayerBJ("Fransis",deck.dealCard(),deck.dealCard()));
-//		players.add(new PlayerBJ("Leo",deck.dealCard(),deck.dealCard()));
 		for(int i=0;i<jugadores.size();i++) {
 			players.add(new PlayerBJ(jugadores.get(i),deck.dealCard(),deck.dealCard()));
 		}
 		
-		jugadorAct.setText("JUGADOR ACTUAL:"+players.get(0).getPlayer());
+		jugadorAct.setText("JUGADOR ACTUAL: "+players.get(0).getPlayer());
 		bHit.addActionListener(panel);
 		bStay.addActionListener(panel);
 		
@@ -109,6 +105,8 @@ public class JFrameBJ extends JFrame{
 		   public void run() {
 		       try {
 		    	   banGanador=hayGanador(panel);
+		    	   if(banGanador==1)
+		    		   Thread.sleep(5000);
 		    	   saltearTurno(panel);
 		    	   
 			} catch (InterruptedException e) {
@@ -216,7 +214,7 @@ public class JFrameBJ extends JFrame{
 		jugadorAct.setBounds(hsX+50,hsY+10,300,50);
 		jugadorAct.setFont(fontLabel);
 		jugadorAct.setForeground(Color.black);
-		jugadorAct.setText("JUGADOR ACTUAL");
+		
 		panel.add(jugadorAct);
 		
 		for(int i=0;i<players.size();i++) {

@@ -31,7 +31,17 @@ public class Card {
 		for ( Suit suit : Suit.values()) {
 			for(Rank rank : Rank.values()) {
 				try {
-					cache.put(cardKey(rank,suit),new Card(rank,suit,ImageIO.read(new File("src\\Archivos\\CARDS\\"+rank.getRankValue()+" "+suit+".png"))));
+					if(rank == rank.JACK) {
+						cache.put(cardKey(rank,suit),new Card(rank,suit,ImageIO.read(new File("src\\Archivos\\CARDS\\J "+suit+".png"))));						
+					}
+					if(rank == rank.QUEEN) {
+						cache.put(cardKey(rank,suit),new Card(rank,suit,ImageIO.read(new File("src\\Archivos\\CARDS\\Q "+suit+".png"))));						
+					}if(rank == rank.KING) {
+						cache.put(cardKey(rank,suit),new Card(rank,suit,ImageIO.read(new File("src\\Archivos\\CARDS\\K "+suit+".png"))));						
+					}
+					else 
+						cache.put(cardKey(rank,suit),new Card(rank,suit,ImageIO.read(new File("src\\Archivos\\CARDS\\"+rank.getRankValue()+" "+suit+".png"))));						
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -83,10 +93,10 @@ public class Card {
 		EIGHT(8),
 		NINE (9),
 		TEN(10),
-		JACK(11),
-		QUEEN(12),
-		KING(13),
-		ACE(14);
+		JACK(10),
+		QUEEN(10),
+		KING(10),
+		ACE(11);
 		
 		private final int rankValue;
 		Rank (final int rankValue){

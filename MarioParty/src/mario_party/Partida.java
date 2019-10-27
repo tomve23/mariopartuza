@@ -2,28 +2,24 @@ package mario_party;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import BlackJack.BlackJack;
 import javazoom.jl.decoder.JavaLayerException;
-import mario_party_graficos.JPanelGrafico;
-import mario_party_graficos.JVentanaDado;
-import mario_party_graficos.JVentanaGrafica;
 
 public class Partida {
 	private Jugador[] players;
 	private int cantRondas;
-	private Mapa map;
-	public static int dado;
-
-	public static boolean hayEstrella;
+	public Mapa map;
+	static int dado;
 
 	// -------Parte para los graficos-------------------------
 
 	Coordenada posMouse = new Coordenada(0, 0);
+	public static ArrayList<Coordenada> opciones;
+	public static Coordenada estrella;
+	public static boolean hayEstrella;
 
-	// esto es todo de prueBa
-	JPanelGrafico jPanel;
+	public JVentanaDado Dado = new JVentanaDado();
 
 	// ------------------------------------------------------
 
@@ -31,15 +27,10 @@ public class Partida {
 		this.cantRondas = cant;
 		this.map = new Mapa(map);
 		this.players = players;
-		hayEstrella = false;
-		jPanel = new JPanelGrafico(map, players, posMouse);
-		new JVentanaGrafica(jPanel).setVisible(true);
-
 	}
 
 	public void tirarDado() {
 		dado = 0;
-		JVentanaDado Dado = new JVentanaDado();
 		Dado.setVisible(true);
 		while (dado == 0)
 			System.out.print("");
@@ -64,13 +55,12 @@ public class Partida {
 
 	private void crearEstrellas() {
 
-
-		Casillero casillero;
 		double[][] matriz = new double[map.getMap().length][map.getMap()[0].length];
 		double maximo = Double.MIN_VALUE;
 		double valor;
 		int coordenadaI = 0;
 		int coordenadaJ = 0;
+		Casillero casillero;
 
 		for (int i = 0; i < players.length; i++) {
 
@@ -78,7 +68,8 @@ public class Partida {
 				for (int k = 1; k < map.getMap()[j].length - 1; k++) {
 					casillero = map.getMap()[j][k];
 					if (casillero.isPathFlag() && (!casillero.isExplosionFlag() || !(casillero.isSwitchFlag()))) {
-						matriz[j][k] += Math.log10(Math.abs(j - players[i].getPosActual().getX()) + Math.abs(k - players[i].getPosActual().getY()))/Math.log10(1000000);
+						matriz[j][k] += Math.log10(Math.abs(j - players[i].getPosActual().getX())
+								+ Math.abs(k - players[i].getPosActual().getY())) / Math.log10(1000000);
 						valor = matriz[j][k];
 
 						if (valor > maximo) {
@@ -94,57 +85,42 @@ public class Partida {
 		}
 		map.getMap()[coordenadaI][coordenadaJ].setStar(true);
 		hayEstrella = true;
-
-		jPanel.setEstrella(new Coordenada(coordenadaI, coordenadaJ));
-		//jPanel.setCasillero(map.getMap()[coordenadaI][coordenadaJ]);
+		estrella = new Coordenada(coordenadaI, coordenadaJ);
 	}
 
 	public String jugarPartida() throws JavaLayerException, InterruptedException {
 
 		int cantJugadores = this.players.length;
 		this.crearEstrellas();
-		for (int i = 0; i < cantRondas; i++) {
 
+		for (int i = 0; i < this.cantRondas; i++) {
 			for (int j = 0; j < cantJugadores; j++) {
-
 				jugarTurno(this.players[j]);
-				if (map.getMap()[players[j].getPosActual().getX()][players[j].getPosActual().getY()].isExplosionFlag())
+				if (map.getMap()[players[j].getPosActual().getX()][players[j].getPosActual().getY()]
+						.isExplosionFlag()) {
 					players[j].decreaseStars(1);
+					System.out.println("El jugador:" + players[j].getTag() + " ha explotado tio!");
+				}
 
 			}
-			
-			BlackJack b = new BlackJack();
-			ArrayList<String> jugadores = new ArrayList<String>();
-			for(int k=0;k<cantJugadores;k++) {
-				jugadores.add(players[k].getTag());
-			}
-			ArrayList<Integer> ganador =b.run(jugadores);
-			for (Integer in : ganador) {
-				players[in].increaseStars(2);
-			}
+			// SALTAR EL MINIJUEGO
+			// BLACKJACK
+			/*
+			 * BlackJack b = new BlackJack(); ArrayList<String> jugadores = new
+			 * ArrayList<String>(); for(int k=0;k<cantJugadores;k++) {
+			 * jugadores.add(players[k].getTag()); } ArrayList<Integer> ganador
+			 * =b.run(jugadores); for (Integer in : ganador) { players[in].increaseStars(2);
+			 * }
+			 */
 		}
-
-		// SALTAR EL MINIJUEGO
+		Dado.dispose();
 		return getGanador(this.players);
 	}
 
 	public void jugarTurno(Jugador p) {
 		this.tirarDado();
 		moverJugador(p);
-
-	}
-
-	public int elegirCamino(ArrayList<Coordenada> validos) {
-		System.out.println("Elija su camino");
-		int eleccion = 0;
-		Scanner scanner = new Scanner(System.in);
-		for (int i = 0; i < validos.size(); i++) {
-			System.out.println("Presione " + i + " para Coordenada " + "(" + validos.get(i).getX() + ","
-					+ validos.get(i).getY() + ")");
-		}
-		eleccion = scanner.nextInt();
-		scanner.close();
-		return eleccion;
+		// ESPACIO PARA EL POWERUP
 	}
 
 	public void moverJugador(Jugador p) {
@@ -165,14 +141,9 @@ public class Partida {
 				validos.add(new Coordenada(x, y + 1)); // Derecha
 
 			validos.remove(p.getPosAnterior());
-			jPanel.paintComponent(jPanel.getGraphics());
 			if (validos.size() > 1) {
 
-				jPanel.setOpciones(validos);
-				jPanel.dibujarOpciones(jPanel.getGraphics());
-				// panelmouse.paint(panelmouse.getGraphics());
-
-				// siguienteIndex = elegirCamino(validos);
+				opciones = validos;
 
 				while (!validos.contains(posMouse)) {
 
@@ -180,7 +151,7 @@ public class Partida {
 				}
 
 				siguienteIndex = validos.indexOf(posMouse);
-				jPanel.setOpciones(null);
+				opciones = null;
 			} else
 				siguienteIndex = 0;
 
@@ -192,17 +163,21 @@ public class Partida {
 
 			p.Desplazarse(validos.get(siguienteIndex));
 
-			jPanel.paintComponent(jPanel.getGraphics());
-			
 			if (map.getMap()[p.getPosActual().getX()][p.getPosActual().getY()].isStar()) {
 				p.increaseStars(1);
-				jPanel.setEstrella(null);
-				//jPanel.setCasillero(null);
+				estrella = null;
 				map.getMap()[p.getPosActual().getX()][p.getPosActual().getY()].setStar(false);
 				this.crearEstrellas();
-				jPanel.dibujarEstrellas(jPanel.getGraphics());
 			}
-		}
 
+		}
+	}
+
+	public Coordenada getPosMouse() {
+		return posMouse;
+	}
+
+	public void setPosMouse(Coordenada posMouse) {
+		this.posMouse = posMouse;
 	}
 }

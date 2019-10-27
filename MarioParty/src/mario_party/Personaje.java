@@ -11,26 +11,14 @@ public class Personaje {
 	private String estadoCivil;
 	private PowerUp powerUp;
 	private Image Img;
-
-	public Personaje(String nombre, String origen, String estado, PowerUp pu, String img) {
-		this.nombre = nombre;
-		this.origen = origen;
+	
+	
+	public Personaje(String nombre, String origen, String estado, PowerUp pu, String img){
+		this.nombre= nombre;
+		this.origen= origen;
 		this.estadoCivil = estado;
-		this.powerUp = new PowerUp(pu.getNombrePowerUp(), pu.getAlcanceCasilleros(), pu.getTurnosCoolDown()); // Realmente
-																												// pienso
-																												// que
-																												// podriamos
-																												// igualarlo.
-																												// Sino
-																												// estas
-																												// creando
-																												// una
-																												// nueva
-																												// instancia
-																												// al
-																												// pedo.
-																												// Revisar
-		Toolkit herramienta = Toolkit.getDefaultToolkit();
+		this.powerUp = new PowerUp(pu.getNombrePowerUp(),pu.getAlcanceCasilleros(),pu.getTurnosCoolDown()); //Realmente pienso que podriamos igualarlo. Sino estas creando una nueva instancia al pedo. Revisar
+		Toolkit herramienta= Toolkit.getDefaultToolkit();
 		this.Img = herramienta.getImage(img);
 	}
 
@@ -73,5 +61,6 @@ public class Personaje {
 	public void setImg(Image img) {
 		Img = img;
 	}
-
+	
+	
 }

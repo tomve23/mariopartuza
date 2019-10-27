@@ -37,13 +37,6 @@ public class Mapa {
 		}
 	}
 
-	
-	public Mapa(Mapa mapa) {
-
-        this.map = mapa.getMap();
-
-    }
-	
 	public Mapa(int n, int m) {
 		this.map = new Casillero[n][m];
 	}

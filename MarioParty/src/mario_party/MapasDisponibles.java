@@ -79,4 +79,23 @@ public class MapasDisponibles {
 	public final static Coordenada Mapa4_inicio2=new Coordenada(1,12);
 	public final static Coordenada Mapa4_inicio3=new Coordenada(9,1);
 	public final static Coordenada Mapa4_inicio4=new Coordenada(9,12);
+	
+	public final static int[][] Mapa5= {//10x13
+			{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+			{0,1,1,1,1,1,1,1,1,1,1,1,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,3,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,1,1,1,1,1,1,1,1,1,1,1,0},
+			{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	};
+
+	public final static Coordenada Mapa5_inicio1=new Coordenada(1,1);
+	public final static Coordenada Mapa5_inicio2=new Coordenada(1,12);
+	public final static Coordenada Mapa5_inicio3=new Coordenada(9,1);
+	public final static Coordenada Mapa5_inicio4=new Coordenada(9,12);
 }

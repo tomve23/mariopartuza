@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import mario_party.Casillero;
+import mario_party.AnimacionPersonaje;
 import mario_party.Coordenada;
 import mario_party.Jugador;
 import mario_party.Partida;
@@ -21,11 +21,8 @@ public class JPanelGrafico extends JPanel {
 	private Jugador jugador[];
 
 	int[][] map;
-	
-	List<Coordenada> opciones;
-	static int increpersonaje = 0;
-	Coordenada estrella;
-	Casillero cas;
+
+	public static int incremento = 0;
 	AnimacionPersonaje hilo;
 
 	public JPanelGrafico(int[][] map, Jugador jugador[], Coordenada posMouse) {
@@ -53,18 +50,15 @@ public class JPanelGrafico extends JPanel {
 
 		super.paintComponent(g);
 
-		 this.PintarBorde(g);
+		this.PintarBorde(g);
 
-		if (opciones != null && opciones.size() > 0)
+		if (Partida.opciones != null && Partida.opciones.size() > 0)
 			this.dibujarOpciones(g);
 
-		if(estrella != null && Partida.hayEstrella)
+		if (Partida.estrella != null && Partida.hayEstrella)
 			this.dibujarEstrellas(g);
 
 		this.PintarPersonaje(g);
-		
-		
-		
 
 	}
 
@@ -73,27 +67,26 @@ public class JPanelGrafico extends JPanel {
 
 		this.PintarBorde(g);
 
-		if (opciones != null && opciones.size() > 0)
+		if (Partida.opciones != null && Partida.opciones.size() > 0)
 			this.dibujarOpciones(g);
 
-		if(estrella != null && Partida.hayEstrella)
+		if (Partida.estrella != null && Partida.hayEstrella)
 			this.dibujarEstrellas(g);
-		
+
 		this.PintarPersonaje(g);
 	}
 
 	public void PintarPersonaje(Graphics g) {
-		for (int i = 0; i < jugador.length; i++) {
 
-		
-			int mx = (increpersonaje % 6) * 32;
-			int my = (increpersonaje / 6) * 32;
+		int mx = (incremento % 6) * 32;
+		int my = (incremento / 6) * 32;
+		for (int i = 0; i < jugador.length; i++) {
 
 			g.drawImage(jugador[i].getCharacter().getImg(), jugador[i].getPosActual().getY() * ancho,
 					jugador[i].getPosActual().getX() * alto, (jugador[i].getPosActual().getY() * ancho) + 32,
 					(jugador[i].getPosActual().getX() * alto) + 48, mx, my, mx + 32, my + 48, null);
+			repaint();
 		}
-		repaint();
 
 	}
 
@@ -128,58 +121,43 @@ public class JPanelGrafico extends JPanel {
 					g.fillRect(j * ancho + difx, i * alto + dify, ancho - 2 * difx, alto - 2 * dify);
 					break;
 				}
+				repaint();
 
 			}
 
 		}
-		repaint();
 	}
 
 	public void dibujarOpciones(Graphics g) {
 		g.setColor(Color.GREEN);
-		for (Coordenada i : opciones) {
+		for (Coordenada i : Partida.opciones) {
 			g.fillRect(i.getY() * ancho, i.getX() * alto, ancho, alto);
 		}
-		repaint();
 
 	}
-
-	public List<Coordenada> getOpciones() {
-		return opciones;
-	}
-
-	public void setOpciones(List<Coordenada> opciones) {
-		this.opciones = opciones;
-	}
-
-	
 
 	public void dibujarEstrellas(Graphics g) {
 
 		/*
-
-		
-			int mx = (increestrella % 6) * 32;
-			int my = (increestrella / 6) * 32;
-
-			g.drawImage(cas.getImg(), estrella.getY() * ancho,
-					estrella.getX() * alto, (estrella.getY()  * ancho) + 32,
-					(estrella.getX() * alto) + 48, mx, my, mx + 32, my + 48, null);
-		repaint();
+		 * 
+		 * 
+		 * int mx = (increestrella % 6) * 32; int my = (increestrella / 6) * 32;
+		 * 
+		 * g.drawImage(cas.getImg(), estrella.getY() * ancho, estrella.getX() * alto,
+		 * (estrella.getY() * ancho) + 32, (estrella.getX() * alto) + 48, mx, my, mx +
+		 * 32, my + 48, null); repaint();
 		 */
 		g.setColor(Color.YELLOW);
-		g.fillRect(estrella.getY() * ancho, estrella.getX() * alto, ancho, alto);
+		g.fillRect(Partida.estrella.getY() * ancho, Partida.estrella.getX() * alto, ancho, alto);
 		g.setColor(Color.YELLOW);
-		g.fillRect(estrella.getY() * ancho + difx, estrella.getX() * alto + dify, ancho - 2 * difx, alto - 2 * dify);
+		g.fillRect(Partida.estrella.getY() * ancho + difx, Partida.estrella.getX() * alto + dify, ancho - 2 * difx,
+				alto - 2 * dify);
 		repaint();
 	}
-
-	public Coordenada getEstrella() {
-		return estrella;
+	public int getIncremento() {
+		return incremento;
 	}
-
-	public void setEstrella(Coordenada estrella) {
-		this.estrella = estrella;
+	public void setIncremento(int incremento) {
+		JPanelGrafico.incremento=incremento;
 	}
-
 }
